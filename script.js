@@ -1,39 +1,28 @@
-document.addEventListener('DOMContentLoaded', function() {
-    const sections = document.querySelectorAll('section');
-  
-    // Verifica se a seção está visível na tela
-    function isSectionInView(section) {
-      const rect = section.getBoundingClientRect();
-      return rect.top >= 0 && rect.bottom <= window.innerHeight;
-    }
-  
-    // Adiciona a classe 'visible' quando a seção entra na tela
-    function checkVisibility() {
-      sections.forEach(section => {
-        if (isSectionInView(section)) {
-          section.classList.add('visible');
-        }
-      });
-    }
-  
-    // Função de scroll para adicionar a classe 'visible' à medida que as seções aparecem
-    window.addEventListener('scroll', checkVisibility);
-  
-    // Verifica as seções assim que a página carrega
-    checkVisibility();
-  });
-  
-  // Estilo adicional para a classe 'visible' que será aplicada quando a seção estiver visível
-  const style = document.createElement('style');
-  style.innerHTML = `
-    section.visible {
-      transform: translateY(0);
-      opacity: 1;
-      transition: all 0.5s ease-out;
-    }
-    section {
-      transform: translateY(50px);
-      opacity: 0;
-    }
-  `;
-  document.head.appendChild(style);
+ // Selecionando os elementos do HTML
+const botao = document.getElementById('btnMensagem');
+const textoMensagem = document.getElementById('mensagemOculta');
+const secaoInterativa = document.getElementById('interativo');
+
+// Lista de dicas para o efeito legal [cite: 58, 62]
+const dicas = [
+    "🌱 Priorize produtos com embalagens recicláveis!",
+    "🍎 Alimentos orgânicos ajudam a preservar o solo.",
+    "🔌 Desligue aparelhos que não estão em uso para economizar energia.",
+    "🛍️ Pratique o 'compre local' para reduzir a emissão de gases."
+];
+
+// Função que acontece ao clicar no botão
+botao.addEventListener('click', function() {
+    // 1. Escolhe uma dica aleatória
+    const dicaAleatoria = dicas[Math.floor(Math.random() * dicas.length)];
+    
+    // 2. Mostra a mensagem no site
+    textoMensagem.innerText = dicaAleatoria;
+    textoMensagem.style.display = 'block';
+
+    // 3. Muda a cor de fundo da seção para dar um efeito visual
+    secaoInterativa.style.backgroundColor = '#d8e2dc';
+    
+    // 4. Alerta simples de interação
+    console.log("O usuário interagiu com o site sustentável!");
+});
